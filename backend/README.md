@@ -1,14 +1,14 @@
-* Hugging-Face exercise : Model Search Engine  * 
+# Hugging-Face exercise : Model Search Engine
 
 You need node 12+ to use the app :
 
-**Install**
+## Install
 
 ```
 npm install
 ```
 
-**To test the app :**
+## Test the app 
 
 ```
 npm run test:all
@@ -33,15 +33,15 @@ End to end tests :
 npm run test:e2e
 ```
 
-## Start the app :
+## Start the app 
 
-# To start with IN_MEMORY database :
+### To start with IN_MEMORY database :
 
 ```
 npm start
 ```
 
-# With the JSON database
+### To start with JSON database :
 
 ```
 npm run start:json
