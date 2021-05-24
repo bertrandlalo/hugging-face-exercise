@@ -1,0 +1,45 @@
+{
+  "name": "hugging-face-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "ts-node src/adapters/primary/startServer.ts",
+    "start:json": "REPOSITORIES=JSON npm start",
+    "test:unit": "jest --watchAll --testRegex=.unit.test.ts --verbose",
+    "test:e2e": "REPOSITORIES=JSON jest --runInBand --watchAll --testRegex=.e2e.test.ts --verbose",
+    "test:integration": "jest --runInBand --testRegex=.integration.test.ts --watchAll --verbose",
+    "test:all": "REPOSITORIES=JSON jest --runInBand --verbose",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.8",
+    "@types/jest": "^26.0.14",
+    "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
+    "@types/yup": "^0.29.9",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2",
+    "supertest": "^6.0.0",
+    "ts-jest": "^26.4.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@types/ramda": "^0.27.40",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "ramda": "^0.27.1",
+    "ts-node": "^9.0.0",
+    "uuid": "^8.3.0",
+    "yup": "^0.29.3"
+  }
+}
