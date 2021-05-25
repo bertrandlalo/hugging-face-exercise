@@ -19,7 +19,9 @@ export class InMemoryModelRepository implements ModelRepository {
   public async getModelIdsWithDescriptionLike(text: string) {
     return Object.keys(this._models).filter((modelId) => {
       const model = this._models![modelId];
-      return model.description ? model.description.includes(text) : false;
+      return model.description === undefined
+        ? false
+        : model.description.toLowerCase().includes(text.toLowerCase());
     });
   }
   // The following methods for test purposes only

@@ -8,7 +8,7 @@ const request = supertest(app);
 describe("FetchAll route", () => {
   it("Fills the model repo with all Hugging Face models", async () => {
     const payload: FetchAllParams = { fromUsers: ["RaphBL", "etalab-ia"] };
-    const response = await request.get("/fetchAll").send(payload);
+    const response = await request.get("/fetchAll").query(payload);
     expect(response.body).toEqual({ success: true });
   });
   it("Returns RaphBL/great-model when seaching", async () => {
@@ -16,7 +16,7 @@ describe("FetchAll route", () => {
       query: "GreatModel does not solve any NLP problem",
     };
     // await request.get("/fetchAll");
-    const response = await request.get("/search").send(payload);
+    const response = await request.get("/search").query(payload);
     expect(response.body).toEqual(["RaphBL/great-model"]);
   });
 });
