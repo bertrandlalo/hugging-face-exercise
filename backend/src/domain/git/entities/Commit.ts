@@ -1,8 +1,13 @@
-import type { ModelId } from "../../core/Model";
+import { ModelId } from "./Model";
+import { File } from "./File";
+
+export type FileUpdate = File & {
+  kind: "deleted" | "changed" | "added";
+};
 
 export type Commit = {
   commitId: string;
-  files: File[];
+  fileUpdates: FileUpdate[];
   date: Date;
   message?: string;
   modelId: ModelId;

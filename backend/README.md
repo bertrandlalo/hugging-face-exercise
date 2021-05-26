@@ -1,6 +1,6 @@
 # Hugging-Face exercise : Model Search Engine
 
-You need node 12+ to use the app :
+You need node 14+ to use the app :
 
 ## Install
 

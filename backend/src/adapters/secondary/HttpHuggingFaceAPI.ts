@@ -7,33 +7,31 @@ import {
 } from "../../domain/git/ports/HuggingFaceAPI";
 
 export class HttpHuggingFaceAPI implements HuggingFaceAPI {
-  public async fetchAllModelInfos(
-    matchesInModelId?: string[]
-  ): Promise<ModelInfo[]> {
+  public async fetchAllModelInfos(fromUsers?: string[]): Promise<ModelInfo[]> {
     // Make a request for a user with a given ID
     const response = await axios.get("https://huggingface.co/api/models");
-    return matchesInModelId
+    return fromUsers
       ? response.data.filter((modelInfo: ModelInfo) => {
-          return matchesInModelId?.some((match) =>
-            modelInfo.modelId.match(match)
-          );
+          return fromUsers?.some((match) => modelInfo.modelId.match(match));
         })
       : response.data;
   }
   public async getLatestModelForId(modelId: ModelId): Promise<Model | null> {
-    const readmeResponse = await axios.get(
-      `https://huggingface.co/${modelId}/raw/main/README.md`
-    );
-    if (readmeResponse.status != 200) {
+    try {
+      const readmeResponse = await axios.get(
+        `https://huggingface.co/${modelId}/raw/main/README.md`
+      );
+      const readmeContent = readmeResponse.data;
+      console.log("Succesfully fetch README from model ", modelId);
+      return {
+        modelId: modelId,
+        latestCommit: "commitABC", // ToDo
+        description: readmeContent.split("---").pop().split("---").pop(),
+        files: [], // ToDo
+      };
+    } catch (error) {
+      console.warn(`Could not fetch README.md from model ${modelId}`);
       return null;
     }
-    const readmeContent = readmeResponse.data;
-
-    return {
-      modelId: modelId,
-      latestCommit: "commitABC", // ToDo
-      description: readmeContent.split("---").pop().split("---").pop(),
-      files: [], // ToDo
-    };
   }
 }

@@ -2,7 +2,7 @@ import { InMemoryModelRepository } from "../../../adapters";
 import { makeModel } from "../../../utils/test.factories";
 import { SearchModels } from "./SearchModels";
 
-describe("My Use case", () => {
+describe("SearchModels", () => {
   let modelRepo: InMemoryModelRepository;
   let searchModels: SearchModels;
 

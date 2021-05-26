@@ -1,6 +1,8 @@
 import { FetchAllModelsFromAPI } from "../../domain/git/useCases/FetchAllModelsFromAPI";
-import { GetUsers } from "../../domain/git/useCases/GetUsers";
+import { GetAllModelIdsFromAPI } from "../../domain/git/useCases/GetModelIds";
+
 import { SearchModels } from "../../domain/git/useCases/SearchModels";
+import { UpdateModel } from "../../domain/git/useCases/UpdateModel";
 import { HttpHuggingFaceAPI } from "../secondary/HttpHuggingFaceAPI";
 import { InMemoryModelRepository } from "../secondary/InMemoryModelRepository";
 import { JsonModelRepository } from "../secondary/JsonModelRepository";
@@ -25,6 +27,7 @@ export const getUsecases = () => {
       huggingFaceAPI
     ),
     searchModels: new SearchModels(repositories.models),
-    getUsers: new GetUsers(huggingFaceAPI),
+    getAllModelIdsFromAPI: new GetAllModelIdsFromAPI(huggingFaceAPI),
+    updateModel: new UpdateModel(repositories.models),
   };
 };

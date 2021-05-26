@@ -1,2 +1,3 @@
 node_modules
 src/adapters/secondary/*.json
+*.DS_Store

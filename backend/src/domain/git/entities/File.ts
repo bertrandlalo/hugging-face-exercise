@@ -1,4 +1,7 @@
+export type FileName = string;
+export type FileContent = any;
+
 export type File = {
-  name: string;
-  content: string;
+  name: FileName;
+  content: FileContent;
 };

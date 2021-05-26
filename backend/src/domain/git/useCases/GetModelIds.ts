@@ -1,7 +1,7 @@
 import { UseCase } from "../../core/UseCase";
 import { HuggingFaceAPI } from "../ports/HuggingFaceAPI";
 
-export class GetUsers implements UseCase<void, string[]> {
+export class GetAllModelIdsFromAPI implements UseCase<void, string[]> {
   private api: HuggingFaceAPI;
 
   constructor(api: HuggingFaceAPI) {
@@ -10,8 +10,6 @@ export class GetUsers implements UseCase<void, string[]> {
 
   public async execute() {
     const modelInfos = await this.api.fetchAllModelInfos();
-    return modelInfos
-      .map((modelInfo) => modelInfo.modelId.split("/").shift())
-      .filter(Boolean) as string[]; // TODO: Remove this ugly `as`.
+    return modelInfos.map((modelInfo) => modelInfo.modelId);
   }
 }
