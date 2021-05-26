@@ -1,4 +1,4 @@
-# Hugging-Face exercise : Model Search Engine
+# Hugging-Face exercise : Model Search Engine (Backend)
 
 You need node 14+ to use the app :
 
