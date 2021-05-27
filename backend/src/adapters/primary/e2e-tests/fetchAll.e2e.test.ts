@@ -1,6 +1,5 @@
 import supertest from "supertest";
 import type { FetchAllParams } from "../../../domain/git/useCases/FetchAllModelsFromAPI";
-import type { SearchModelParams } from "../../../domain/git/useCases/SearchModels";
 import { app } from "../server";
 
 const request = supertest(app);
@@ -16,13 +15,5 @@ describe("FetchAll route", () => {
         expect.objectContaining({ modelId: "RaphBL/great-model" }),
       ])
     );
-  });
-  it("Returns RaphBL/great-model when seaching", async () => {
-    const payload: SearchModelParams = {
-      query: "GreatModel does not solve any NLP problem",
-    };
-    // await request.get("/fetchAll");
-    const response = await request.get("/search").query(payload);
-    expect(response.body).toEqual(["RaphBL/great-model"]);
   });
 });
