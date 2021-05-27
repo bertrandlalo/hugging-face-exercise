@@ -1,6 +1,6 @@
 # Hugging Face Exercise 
 
-<img src="https://github.com/bertrandlalo/hugging-face-exercise/workflows/main/badge.svg?branch=main">
+<img src="https://github.com/bertrandlalo/hugging-face-exercise/actions/workflows/main.yml/badge.svg">
 
 ![demo GIF](demo.gif)
 
