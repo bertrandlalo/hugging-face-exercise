@@ -7,12 +7,16 @@ import {
 } from "../../domain/git/ports/HuggingFaceAPI";
 
 export class HttpHuggingFaceAPI implements HuggingFaceAPI {
-  public async fetchAllModelInfos(fromUsers?: string[]): Promise<ModelInfo[]> {
+  public async fetchAllModels(
+    matchingModelId?: string[]
+  ): Promise<ModelInfo[]> {
     // Make a request for a user with a given ID
     const response = await axios.get("https://huggingface.co/api/models");
-    return fromUsers
+    return matchingModelId
       ? response.data.filter((modelInfo: ModelInfo) => {
-          return fromUsers?.some((match) => modelInfo.modelId.match(match));
+          return matchingModelId?.some((match) =>
+            modelInfo.modelId.match(match)
+          );
         })
       : response.data;
   }
@@ -26,7 +30,7 @@ export class HttpHuggingFaceAPI implements HuggingFaceAPI {
       return {
         modelId: modelId,
         latestCommit: "commitABC", // ToDo
-        description: readmeContent.split("---").pop().split("---").pop(),
+        description: readmeContent,
         files: [], // ToDo
       };
     } catch (error) {

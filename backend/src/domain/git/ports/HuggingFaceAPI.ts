@@ -17,6 +17,6 @@ export type ModelInfo = {
 };
 
 export interface HuggingFaceAPI {
-  fetchAllModelInfos: (matchesInModelId?: string[]) => Promise<ModelInfo[]>;
+  fetchAllModels: (matchesInModelId?: string[]) => Promise<ModelInfo[]>;
   getLatestModelForId: (modelId: ModelId) => Promise<Model | null>;
 }

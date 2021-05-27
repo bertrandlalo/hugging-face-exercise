@@ -1,14 +1,14 @@
 import { UseCase } from "../../core/UseCase";
-import type { Model } from "../entities/Model";
+import { Model } from "../entities/Model";
 import { HuggingFaceAPI } from "../ports/HuggingFaceAPI";
 import { ModelRepository } from "../ports/ModelRepository";
 
 export type FetchAllParams = {
-  fromUsers?: string[];
+  matchingModelId?: string[];
   limitNumberOfModels?: number;
 };
 
-export class FetchAllModelsFromAPI implements UseCase<FetchAllParams, void> {
+export class FetchAllModelsFromAPI implements UseCase<FetchAllParams, Model[]> {
   private modelRepository: ModelRepository;
   private api: HuggingFaceAPI;
 
@@ -17,9 +17,12 @@ export class FetchAllModelsFromAPI implements UseCase<FetchAllParams, void> {
     this.api = api;
   }
 
-  public async execute({ fromUsers, limitNumberOfModels }: FetchAllParams) {
-    console.log("fromUsers: ", fromUsers);
-    const modelInfos = await this.api.fetchAllModelInfos(fromUsers);
+  public async execute({
+    matchingModelId,
+    limitNumberOfModels,
+  }: FetchAllParams) {
+    console.log("matchingModelId: ", matchingModelId);
+    const modelInfos = await this.api.fetchAllModels(matchingModelId);
     console.log("modelInfos: ", modelInfos);
     const models = await Promise.all(
       modelInfos
@@ -33,20 +36,15 @@ export class FetchAllModelsFromAPI implements UseCase<FetchAllParams, void> {
     await Promise.all(
       models.map((model) => {
         if (model) {
-          this.addOrUpdateInModelRepo(model);
+          this.modelRepository.add(model);
         }
       })
     );
     console.log(`Successfully added ${models.length} models to repo`);
+    return models.filter(notNull);
   }
+}
 
-  private async addOrUpdateInModelRepo(model: Model) {
-    const modelIdExists = await this.modelRepository.modelIdExists(
-      model.modelId
-    );
-    if (modelIdExists) {
-      await this.modelRepository.update(model.modelId, model);
-    }
-    await this.modelRepository.add(model);
-  }
+function notNull<T>(value: T | null): value is T {
+  return value !== null;
 }

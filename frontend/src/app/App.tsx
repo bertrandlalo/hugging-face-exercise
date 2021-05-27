@@ -56,7 +56,7 @@ export const App = () => {
     axios({
       method: "get",
       url: "http://localhost:8080/fetchAll",
-      params: { fromUsers, limitNumberOfModels },
+      params: { matchingModelId: fromUsers, limitNumberOfModels },
     }).then(function (response) {
       setIsFetchingModels(false);
     });
@@ -79,12 +79,18 @@ export const App = () => {
   const scrapReadmeForModelId = (modelId: string) => {
     axios({
       method: "get",
-      url: `http://localhost:8080/getWithCors`,
-      params: { url: `https://huggingface.co/${modelId}/raw/main/README.md` },
-    }).then(function (response) {
-      console.log(response.data);
-      setReadmeContent(response.data);
-    });
+      url: `http://localhost:8080/eventuallyFetchModelAndGetReadme`,
+      params: { modelId },
+    })
+      .then(function (response) {
+        console.log(response.data);
+        setReadmeContent(response.data);
+      })
+      .catch(function (error) {
+        setReadmeContent(
+          `Could not fetch README from model ${modelId}:\n${error}`
+        );
+      });
   };
 
   const getModelWithMatchingDescription = () => {

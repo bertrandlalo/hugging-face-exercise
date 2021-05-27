@@ -2,7 +2,11 @@
 
 ## Description
 TODO
+## Requirements
 
+* [Docker](https://docs.docker.com/get-docker/)
+* [Node.js](https://nodejs.org/) (this sample tested with 10.x)
+* [Git](https://git-scm.com/downloads)
 ## Install
 
 You need node 14+ to use the app :
@@ -49,3 +53,17 @@ npm start
 npm run start:json
 ```
 
+### To start with ELASTIC SEARCH database:
+
+Pull Elastic Search Image and start the container : 
+
+```
+docker pull docker.elastic.co/elasticsearch/elasticsearch:7.13.0 to bring image down to local computer
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.13.0
+```
+
+Then launch the app : 
+
+```
+npm run start:elastic
+```

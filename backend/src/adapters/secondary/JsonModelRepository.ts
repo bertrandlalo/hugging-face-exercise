@@ -3,7 +3,6 @@ import * as util from "util";
 import type { Model, ModelId } from "../../domain/git/entities/Model";
 import { InMemoryModelRepository } from "./InMemoryModelRepository";
 
-const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
 export class JsonModelRepository extends InMemoryModelRepository {
@@ -26,15 +25,4 @@ export class JsonModelRepository extends InMemoryModelRepository {
   private async writeModelsToJson() {
     await writeFile(this.path, JSON.stringify(this.models));
   }
-
-  // private async readModelsFromJson() {
-  //   const models = await this._readData();
-  //   this.setModels(models);
-  // }
-
-  // private async _readData(): Promise<Model[]> {
-  //   const data = await readFile(this.path);
-  //   const models = JSON.parse(data.toString());
-  //   return models;
-  // }
 }

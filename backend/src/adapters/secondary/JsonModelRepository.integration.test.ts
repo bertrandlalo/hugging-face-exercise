@@ -6,7 +6,7 @@ import { JsonModelRepository } from "./JsonModelRepository";
 
 const readFile = util.promisify(fs.readFile);
 
-describe("JsonGitRepository", () => {
+describe("JsonModelRepository", () => {
   const dataPath = `${__dirname}/data-test.json`;
   let modelRepo: JsonModelRepository;
 

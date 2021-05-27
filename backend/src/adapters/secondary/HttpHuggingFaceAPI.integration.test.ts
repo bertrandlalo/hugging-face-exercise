@@ -12,7 +12,7 @@ describe("HttpHuggingFaceAPI", () => {
 
   describe("fetch all models infos", () => {
     it("returns a list with model infos, amonst which the one we added for test purposes", async () => {
-      const actualAllModelInfos = await httpHuggingFaceAPI.fetchAllModelInfos();
+      const actualAllModelInfos = await httpHuggingFaceAPI.fetchAllModels();
       expect(actualAllModelInfos).toContainEqual({
         modelId: "RaphBL/great-model",
         private: false,

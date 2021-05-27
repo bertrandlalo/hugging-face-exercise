@@ -7,9 +7,15 @@ const request = supertest(app);
 
 describe("FetchAll route", () => {
   it("Fills the model repo with all Hugging Face models", async () => {
-    const payload: FetchAllParams = { fromUsers: ["RaphBL", "etalab-ia"] };
+    const payload: FetchAllParams = {
+      matchingModelId: ["RaphBL", "etalab-ia"],
+    };
     const response = await request.get("/fetchAll").query(payload);
-    expect(response.body).toEqual({ success: true });
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ modelId: "RaphBL/great-model" }),
+      ])
+    );
   });
   it("Returns RaphBL/great-model when seaching", async () => {
     const payload: SearchModelParams = {

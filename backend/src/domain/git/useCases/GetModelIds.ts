@@ -9,7 +9,7 @@ export class GetAllModelIdsFromAPI implements UseCase<void, string[]> {
   }
 
   public async execute() {
-    const modelInfos = await this.api.fetchAllModelInfos();
+    const modelInfos = await this.api.fetchAllModels();
     return modelInfos.map((modelInfo) => modelInfo.modelId);
   }
 }

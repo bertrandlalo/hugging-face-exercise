@@ -6,8 +6,8 @@ import { ModelRepository } from "../../domain/git/ports/ModelRepository";
 export class InMemoryModelRepository implements ModelRepository {
   private _models: Record<ModelId, Model> = {};
 
-  public async modelIdExists(modelId: ModelId) {
-    return !!this._models[modelId];
+  public async getModelById(modelId: ModelId) {
+    return this._models[modelId];
   }
 
   public async add(model: Model) {
@@ -26,13 +26,7 @@ export class InMemoryModelRepository implements ModelRepository {
         : model.description.toLowerCase().includes(text.toLowerCase());
     });
   }
-  public async addFileToModel(modelId: ModelId, file: File) {
-    const previousStoredModel = this._models[modelId];
-    if (!previousStoredModel) {
-      return;
-    }
-    this.update(modelId, { files: [...previousStoredModel.files, file] });
-  }
+
   public async updateFileFromModel(modelId: ModelId, file: File) {
     throw new Error("Not implemented");
   }

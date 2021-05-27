@@ -8,7 +8,7 @@ export class FakeHuggingFaceAPI implements HuggingFaceAPI {
   private _modelsInfos: ModelInfo[] = [];
   private _models: Record<ModelId, Model> = {};
 
-  public async fetchAllModelInfos() {
+  public async fetchAllModels() {
     return this._modelsInfos;
   }
   public async getLatestModelForId(modelId: ModelId) {
