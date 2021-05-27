@@ -1,5 +1,7 @@
 # Hugging Face Exercise 
 
+<img src="https://github.com/bertrandlalo/hugging-face-exercise/workflows/ci/badge.svg?branch=main">
+
 ![demo GIF](demo.gif)
 
 ## Install
