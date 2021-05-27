@@ -3,8 +3,15 @@ name: Hugging Face Exercise CI
 on: [push]
 
 jobs:
-  test:
+  backend:
     runs-on: ubuntu-latest
+    services: 
+      elasticsearch:
+        image: elasticsearch:7.12.1
+        ports:
+        - 9200:9200
+        options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+
     steps:
     - name: Checkout
       uses: actions/checkout@master
@@ -23,4 +30,6 @@ jobs:
       working-directory: ./backend
       run: |
         npm run test:all
+      env:
+        CI: true
 

@@ -5,7 +5,9 @@ import { ModelRepository } from "../../domain/git/ports/ModelRepository";
 export class ElasticModelRepository implements ModelRepository {
   private client: Client;
   constructor() {
-    this.client = new Client({ node: "http://localhost:9200" });
+    const host = "localhost"; //process.env.CI ? "elasticsearch" : "localhost";
+    this.client = new Client({ node: `http://${host}:9200` });
+    console.log(this.client);
   }
 
   public async add(model: Model) {
