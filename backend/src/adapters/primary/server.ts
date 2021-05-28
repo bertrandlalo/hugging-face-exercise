@@ -25,7 +25,6 @@ const eventuallyFetchModelAndGetReadme = async ({
 }: {
   modelId: ModelId;
 }): Promise<string | undefined | null> => {
-  console.log("eventuallyFetchModelAndGetReadme ", modelId);
   let readmeContent = await useCases.getReadmeFromRepo.execute({ modelId });
   // TODO / Note to self or reviewer : Not so proud of how I handle mistake, playing with null... Refactoring needed !
   if (readmeContent === null) {

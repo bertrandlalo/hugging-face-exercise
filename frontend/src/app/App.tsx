@@ -83,7 +83,6 @@ export const App = () => {
       params: { modelId },
     })
       .then(function (response) {
-        console.log(response.data);
         setReadmeContent(response.data);
       })
       .catch(function (error) {
@@ -100,15 +99,12 @@ export const App = () => {
       url: "http://localhost:8080/search",
       params: { query: searchQuery },
     }).then(function (response) {
-      console.log(response.data);
       setSearchResult(response.data);
     });
     setIsSearching(false);
   };
 
   const publishNewReadme = () => {
-    console.log(readmeContent);
-    console.log(modelIdToUpdateReadmeFrom);
     const commitId = uuidv4();
     axios({
       method: "post",
@@ -128,7 +124,7 @@ export const App = () => {
         },
       },
     }).then(function (response) {
-      console.log(setReadmeContent(""));
+      setReadmeContent("");
     });
   };
 

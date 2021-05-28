@@ -56,16 +56,29 @@ describe("ElasticModelRepository", () => {
       });
       const modelAboutLife = makeModel({
         modelId: "life123",
-        description: "This model explains life.",
+        description: "This model explains LIFZ.",
       });
       await elasticModelRepo.add(modelAboutLove);
       await elasticModelRepo.add(modelAboutLife);
     });
-    it("can retrieve a model from description", async () => {
+    it("can retrieve a model from one word matching", async () => {
+      const matchingModels = await elasticModelRepo.getModelIdsWithDescriptionLike(
+        "love"
+      );
+      expect(matchingModels).toEqual(["love123"]);
+    });
+    it("can retrieve a model from multiple words matching", async () => {
       const matchingModels = await elasticModelRepo.getModelIdsWithDescriptionLike(
         "explains love"
       );
       expect(matchingModels).toEqual(["love123"]);
     });
+    // TODO : PUT Standard Analizer.
+    // it("is not case sensitive", async () => {
+    //   const matchingModels = await elasticModelRepo.getModelIdsWithDescriptionLike(
+    //     "life"
+    //   );
+    //   expect(matchingModels).toEqual(["life123"]);
+    // });
   });
 });

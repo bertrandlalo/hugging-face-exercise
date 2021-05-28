@@ -21,9 +21,7 @@ export class FetchAllModelsFromAPI implements UseCase<FetchAllParams, Model[]> {
     matchingModelId,
     limitNumberOfModels,
   }: FetchAllParams) {
-    console.log("matchingModelId: ", matchingModelId);
     const modelInfos = await this.api.fetchAllModels(matchingModelId);
-    console.log("modelInfos: ", modelInfos);
     const models = await Promise.all(
       modelInfos
         .filter((modelInfo) => !modelInfo.private) // Only public & from those users
