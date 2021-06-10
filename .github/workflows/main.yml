@@ -16,10 +16,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Set Node.js 15.x
+    - name: Set Node.js 14.x
       uses: actions/setup-node@master
       with:
-        version: 15.x
+        version: 14.x
 
     - name: Install dependencies
       working-directory: ./backend
